@@ -28,10 +28,6 @@
   },
   "techStack": [
     {
-      "name": "Cypress",
-      "icon": "TestTube2"
-    },
-    {
       "name": "Selenium",
       "icon": "Globe"
     },
@@ -62,24 +58,17 @@
   ],
   "experience": [
     {
-      "year": "2023 - Presente",
-      "title": "QA Engineer",
+      "year": "2022 - Presente",
+      "title": "Especialista de QA",
       "company": "NTT Data",
-      "description": "Liderança em automação de testes com Cypress e Selenium. Desenvolvimento de frameworks de teste e integração com pipelines CI/CD. Implementação de testes de API e performance.",
+      "description": "Atuação em projetos de grande porte nos setores de telefonia (TIM, Oi) e energia (Neoenergia), com foco em garantia da qualidade de software, automação de testes e metodologias ágeis. Responsável por:\n\nPlanejamento, escrita e execução de cenários de testes funcionais e não funcionais para aplicações Web e Mobile\nDesenvolvimento de testes automatizados com Selenium e Python, integrados ao pipeline de CI/CD\nParticipação em projetos críticos de telecomunicações e energia, garantindo a estabilidade e confiabilidade de sistemas de alto impacto\nUtilização de ferramentas como JIRA, Visual Studio Code, JUnit e Azure DevOps para gestão de testes e bugs\nApoio na especificação funcional, validação de critérios de aceitação (UAT) e testes de regressão\nColaboração com times multidisciplinares em ambientes Scrum/Kanban, com foco em entregas contínuas e melhoria de processos",
       "isActive": true
     },
     {
-      "year": "2022 - 2023",
-      "title": "QA Analyst",
-      "company": "NTT Data",
-      "description": "Análise e execução de testes funcionais e de regressão. Documentação de casos de teste em Gherkin/BDD. Colaboração com times de desenvolvimento ágil.",
-      "isActive": false
-    },
-    {
       "year": "2021 - 2022",
-      "title": "QA Trainee",
+      "title": "Analista de testes Junior",
       "company": "NTT Data",
-      "description": "Introdução às práticas de QA e metodologias de teste. Aprendizado de ferramentas de automação e boas práticas de desenvolvimento de software.",
+      "description": "Atuação com foco em fundamentos de testes de software, desenvolvendo habilidades em planejamento, execução e documentação de testes. Responsável por:\n\nElaboração de cenários de testes manuais para aplicações Web e Mobile\nAbertura, documentação e acompanhamento de bugs junto à equipe de desenvolvimento\nParticipação em sprints ágeis com foco em entregas incrementais e melhoria contínua\nApoio na validação de requisitos funcionais e testes de aceitação\nUtilização de ferramentas como JIRA e Azure DevOps para gestão de tarefas e testes",
       "isActive": false
     }
   ],
@@ -100,7 +89,7 @@
     },
     {
       "value": "100%",
-      "label": "Comprometimento"
+      "label": "Inovação"
     }
   ],
   "certifications": [
