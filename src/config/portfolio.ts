@@ -44,6 +44,12 @@ export interface PortfolioConfig {
         year: string;
         credentialUrl?: string;
     }[];
+    qualifications: {
+        title: string;
+        institution: string;
+        year: string;
+        type: string; // "graduation" | "course" | "bootcamp" | "specialization"
+    }[];
     learning: {
         title: string;
         subtitle: string;
@@ -132,6 +138,20 @@ Scenario: Login com sucesso
             issuer: "Udemy",
             year: "2022",
             credentialUrl: "",
+        },
+    ],
+    qualifications: [
+        {
+            title: "Análise e Desenvolvimento de Sistemas",
+            institution: "Universidade Exemplo",
+            year: "2021",
+            type: "graduation",
+        },
+        {
+            title: "Bootcamp de QA Automation",
+            institution: "Digital Innovation One",
+            year: "2022",
+            type: "bootcamp",
         },
     ],
     learning: {

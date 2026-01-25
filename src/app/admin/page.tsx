@@ -17,6 +17,7 @@ import {
     Check,
     AlertCircle,
     BadgeCheck,
+    GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
 import type { PortfolioConfig } from "@/config/portfolio";
@@ -199,6 +200,31 @@ export default function AdminPanel() {
         });
     };
 
+    const addQualification = () => {
+        if (!config) return;
+        const quals = config.qualifications || [];
+        setConfig({
+            ...config,
+            qualifications: [
+                ...quals,
+                {
+                    title: "Nova Qualificação",
+                    institution: "Instituição",
+                    year: "2024",
+                    type: "course",
+                },
+            ],
+        });
+    };
+
+    const removeQualification = (index: number) => {
+        if (!config) return;
+        setConfig({
+            ...config,
+            qualifications: (config.qualifications || []).filter((_, i) => i !== index),
+        });
+    };
+
     // ============================================
     // LOGIN SCREEN
     // ============================================
@@ -252,6 +278,7 @@ export default function AdminPanel() {
         { id: "project", label: "Projeto", icon: Code2 },
         { id: "experience", label: "Experiência", icon: Briefcase },
         { id: "certifications", label: "Certificações", icon: BadgeCheck },
+        { id: "qualifications", label: "Qualificações", icon: GraduationCap },
         { id: "tech", label: "Tech Stack", icon: Code2 },
         { id: "metrics", label: "Métricas", icon: BarChart3 },
         { id: "learning", label: "Aprendizado", icon: Award },
@@ -771,6 +798,99 @@ export default function AdminPanel() {
                                                             placeholder="https://..."
                                                             className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-white/10 text-white focus:border-cyber-blue/50 focus:outline-none"
                                                         />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* Qualifications Tab */}
+                                {activeTab === "qualifications" && (
+                                    <div className="space-y-6">
+                                        <div className="flex items-center justify-between mb-6">
+                                            <h2 className="text-2xl font-bold">Qualificações</h2>
+                                            <button
+                                                onClick={addQualification}
+                                                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-cyber-blue/20 text-cyber-blue hover:bg-cyber-blue/30 transition-colors"
+                                            >
+                                                <Plus size={18} />
+                                                Adicionar
+                                            </button>
+                                        </div>
+                                        {(config.qualifications || []).map((qual, index) => (
+                                            <div
+                                                key={index}
+                                                className="p-6 rounded-xl bg-slate-800/50 border border-white/10 space-y-4"
+                                            >
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-sm text-gray-400">Qualificação #{index + 1}</span>
+                                                    <button
+                                                        onClick={() => removeQualification(index)}
+                                                        className="p-2 rounded-lg text-red-400 hover:bg-red-500/20 transition-colors"
+                                                    >
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                </div>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <div className="md:col-span-2">
+                                                        <label className="block text-sm text-gray-400 mb-2">Título</label>
+                                                        <input
+                                                            type="text"
+                                                            value={qual.title}
+                                                            onChange={(e) => {
+                                                                const newQuals = [...(config.qualifications || [])];
+                                                                newQuals[index] = { ...newQuals[index], title: e.target.value };
+                                                                setConfig({ ...config, qualifications: newQuals });
+                                                            }}
+                                                            className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-white/10 text-white focus:border-cyber-blue/50 focus:outline-none"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm text-gray-400 mb-2">Instituição</label>
+                                                        <input
+                                                            type="text"
+                                                            value={qual.institution}
+                                                            onChange={(e) => {
+                                                                const newQuals = [...(config.qualifications || [])];
+                                                                newQuals[index] = { ...newQuals[index], institution: e.target.value };
+                                                                setConfig({ ...config, qualifications: newQuals });
+                                                            }}
+                                                            className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-white/10 text-white focus:border-cyber-blue/50 focus:outline-none"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm text-gray-400 mb-2">Ano</label>
+                                                        <input
+                                                            type="text"
+                                                            value={qual.year}
+                                                            onChange={(e) => {
+                                                                const newQuals = [...(config.qualifications || [])];
+                                                                newQuals[index] = { ...newQuals[index], year: e.target.value };
+                                                                setConfig({ ...config, qualifications: newQuals });
+                                                            }}
+                                                            className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-white/10 text-white focus:border-cyber-blue/50 focus:outline-none"
+                                                        />
+                                                    </div>
+                                                    <div className="md:col-span-2">
+                                                        <label className="block text-sm text-gray-400 mb-2">Tipo</label>
+                                                        <select
+                                                            value={qual.type}
+                                                            onChange={(e) => {
+                                                                const newQuals = [...(config.qualifications || [])];
+                                                                newQuals[index] = { ...newQuals[index], type: e.target.value };
+                                                                setConfig({ ...config, qualifications: newQuals });
+                                                            }}
+                                                            className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-white/10 text-white focus:border-cyber-blue/50 focus:outline-none"
+                                                        >
+                                                            <option value="graduation">Graduação</option>
+                                                            <option value="postgraduate">Pós-graduação</option>
+                                                            <option value="masters">Mestrado</option>
+                                                            <option value="doctorate">Doutorado</option>
+                                                            <option value="specialization">Especialização</option>
+                                                            <option value="course">Curso</option>
+                                                            <option value="bootcamp">Bootcamp</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>

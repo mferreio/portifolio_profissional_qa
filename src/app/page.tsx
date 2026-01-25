@@ -617,6 +617,57 @@ export default function Portfolio() {
                 </div>
               </GlassCard>
             )}
+
+            {/* Qualifications Card */}
+            {config.qualifications && config.qualifications.length > 0 && (
+              <GlassCard className="lg:col-span-3 p-8" delay={0.6}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 rounded-lg bg-cyber-violet/10">
+                    <BookOpen className="text-cyber-violet" size={24} />
+                  </div>
+                  <h3 className="text-2xl font-bold">Qualificações</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {config.qualifications.map((qual, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                      className="p-4 rounded-xl bg-gradient-to-br from-cyber-violet/10 to-cyber-pink/10 border border-white/10 hover:border-cyber-violet/30 transition-all"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-cyber-pink/10 flex-shrink-0">
+                          {qual.type === "graduation" ? (
+                            <Award className="text-cyber-pink" size={20} />
+                          ) : (
+                            <BookOpen className="text-cyber-pink" size={20} />
+                          )}
+                        </div>
+                        <div>
+                          <span className="text-[10px] uppercase tracking-wider text-cyber-violet/80 font-medium">
+                            {qual.type === "graduation" ? "Graduação" :
+                              qual.type === "postgraduate" ? "Pós-graduação" :
+                                qual.type === "masters" ? "Mestrado" :
+                                  qual.type === "doctorate" ? "Doutorado" :
+                                    qual.type === "bootcamp" ? "Bootcamp" :
+                                      qual.type === "course" ? "Curso" : "Especialização"}
+                          </span>
+                          <h4 className="font-semibold text-white text-sm mb-1">
+                            {qual.title}
+                          </h4>
+                          <p className="text-gray-400 text-xs">
+                            {qual.institution} • {qual.year}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </GlassCard>
+            )}
           </div>
         </div>
       </section>

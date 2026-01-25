@@ -110,5 +110,13 @@
       "year": "2025",
       "credentialUrl": ""
     }
+  ],
+  "qualifications": [
+    {
+      "title": " Inteligência Artificial Fundamentos 2.0",
+      "institution": "DATA SCIENCE ACADEMY",
+      "year": "2021",
+      "type": "course"
+    }
   ]
 }
