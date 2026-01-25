@@ -36,7 +36,11 @@ export async function POST(request: Request) {
         fs.writeFileSync(CONFIG_PATH, JSON.stringify(data, null, 2), "utf-8");
 
         return NextResponse.json({ success: true, message: "Configuração salva com sucesso!" });
-    } catch (error) {
-        return NextResponse.json({ error: "Failed to save config" }, { status: 500 });
+    } catch (error: any) {
+        console.error("Erro ao salvar configuração:", error);
+        return NextResponse.json(
+            { error: "Failed to save config", details: error.message },
+            { status: 500 }
+        );
     }
 }

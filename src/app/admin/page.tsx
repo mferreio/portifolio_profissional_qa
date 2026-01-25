@@ -33,9 +33,16 @@ export default function AdminPanel() {
     const [loading, setLoading] = useState(false);
     const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
     const [activeTab, setActiveTab] = useState("personal");
+    const [isProduction, setIsProduction] = useState(false);
 
     // Carrega os dados ao autenticar
     useEffect(() => {
+        // Verifica se está em produção
+        if (typeof window !== "undefined") {
+            const hostname = window.location.hostname;
+            setIsProduction(hostname !== "localhost" && hostname !== "127.0.0.1");
+        }
+
         if (isAuthenticated) {
             loadConfig();
         }
@@ -64,6 +71,10 @@ export default function AdminPanel() {
 
     const handleSave = async () => {
         if (!config) return;
+        if (isProduction) {
+            alert("Em produção, a edição deve ser feita localmente e enviada via Git.");
+            return;
+        }
 
         setSaveStatus("saving");
         try {
@@ -298,38 +309,45 @@ export default function AdminPanel() {
                         </Link>
                         <h1 className="text-xl font-bold">Painel Admin</h1>
                     </div>
-                    <button
-                        onClick={handleSave}
-                        disabled={saveStatus === "saving"}
-                        className={`flex items-center gap-2 px-6 py-2 rounded-xl font-semibold transition-all ${saveStatus === "success"
-                            ? "bg-cyber-emerald text-white"
-                            : saveStatus === "error"
-                                ? "bg-red-500 text-white"
-                                : "bg-gradient-to-r from-cyber-blue to-cyber-violet text-white hover:shadow-lg hover:shadow-cyber-blue/25"
-                            }`}
-                    >
-                        {saveStatus === "saving" ? (
-                            <>
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                Salvando...
-                            </>
-                        ) : saveStatus === "success" ? (
-                            <>
-                                <Check size={18} />
-                                Salvo!
-                            </>
-                        ) : saveStatus === "error" ? (
-                            <>
-                                <AlertCircle size={18} />
-                                Erro ao salvar
-                            </>
-                        ) : (
-                            <>
-                                <Save size={18} />
-                                Salvar Alterações
-                            </>
-                        )}
-                    </button>
+                    {isProduction ? (
+                        <div className="flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 rounded-xl text-sm font-medium">
+                            <AlertCircle size={18} />
+                            Edição apenas local
+                        </div>
+                    ) : (
+                        <button
+                            onClick={handleSave}
+                            disabled={saveStatus === "saving"}
+                            className={`flex items-center gap-2 px-6 py-2 rounded-xl font-semibold transition-all ${saveStatus === "success"
+                                ? "bg-cyber-emerald text-white"
+                                : saveStatus === "error"
+                                    ? "bg-red-500 text-white"
+                                    : "bg-gradient-to-r from-cyber-blue to-cyber-violet text-white hover:shadow-lg hover:shadow-cyber-blue/25"
+                                }`}
+                        >
+                            {saveStatus === "saving" ? (
+                                <>
+                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    Salvando...
+                                </>
+                            ) : saveStatus === "success" ? (
+                                <>
+                                    <Check size={18} />
+                                    Salvo!
+                                </>
+                            ) : saveStatus === "error" ? (
+                                <>
+                                    <AlertCircle size={18} />
+                                    Erro ao salvar
+                                </>
+                            ) : (
+                                <>
+                                    <Save size={18} />
+                                    Salvar Alterações
+                                </>
+                            )}
+                        </button>
+                    )}
                 </div>
             </header>
 
