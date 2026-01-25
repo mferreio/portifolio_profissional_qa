@@ -1,0 +1,114 @@
+{
+  "personal": {
+    "firstName": "Matheus",
+    "lastName": "Ferreira",
+    "role": "QA Engineer",
+    "tagline": "<QA Engineer />",
+    "description": "Atuo realizando testes funcionais manual e automatizando buscando utilizar AI para tornar os testes mais eficientes e precisos. Desenvolvi a BDD_PyTech, ferramentas focada em produtividade; sempre buscando formas de simplificar o dia a dia da equipe e diminuir barreira de entrada para novos profissionais. Além da parte técnica, gosto muito de trocar experiências e ajudar quem está começando a trilhar o caminho da qualidade de software e automação, acreditando que o conhecimento compartilhado fortalece todo o time.",
+    "statusBadge": "Available for Projects",
+    "email": "mferreio.qa@gmail.com",
+    "phone": "5522988741592",
+    "linkedin": "https://www.linkedin.com/in/matheus-ferreira-57380271/",
+    "github": "https://github.com/mferreio"
+  },
+  "project": {
+    "name": "BDD_PyTech",
+    "subtitle": "Assistente Automatizador",
+    "description": "O Gerador de Testes Automatizados BDD é uma extensão para navegador que captura automaticamente as interações do usuário em páginas web e gera um projeto completo de testes automatizados em Python usando Selenium e Behave (BDD - Behavior Driven Development).",
+    "features": [
+      "Chrome Extension",
+      "AI Integration",
+      "Gherkin Output",
+      "One-Click Export"
+    ],
+    "codeExample": {
+      "filename": "bdd_pytech_output.feature",
+      "content": "Funcionalidades\n- ✅ Gravação automática de interações do usuário (cliques, preenchimentos, navegação)\n- ✅ Conversão automática para sintaxe Gherkin (Given, When, Then)\n- ✅ Geração de Page Objects com seletores CSS/XPath reais\n- ✅ Geração de Step Definitions correspondentes ao Gherkin\n- ✅ Exportação de projeto completo e executável\n- ✅ Painel flutuante responsivo e acessível\n- ✅ Suporte a múltiplas features e cenários\n- ✅ Código limpo seguindo boas práticas\n\nEstrutura do Projeto Exportado\n```\nprojeto/\n├── features/\n│   ├── nome_feature.feature      # Arquivo Gherkin com cenários\n│   ├── pages/\n│   │   └── nome_feature_page.py  # Page Object Model\n│   └── steps/\n│       └── nome_feature_steps.py # Step Definitions\n├── environment.py                # Configuração Behave\n├── requirements.txt              # Dependências Python\n└── README.md                     # Instruções de uso\n```\n\nExemplo de Arquivo Gerado\n\nlogin.feature**\n```gherkin\nlanguage: pt\nFuncionalidade: Login\n\n  Cenário: Login com sucesso\n    Given acessa a URL \"https://exemplo.com/login\"\n    When preenche usuario com \"teste@teste.com\"\n    When preenche senha com \"senha123\"\n    Then clica no botao_entrar\n```\n\nfeatures/pages/login_page.py**\n```python\nclass LoginLocators:\n    USUARIO = (By.CSS_SELECTOR, \"#username\")\n    SENHA = (By.CSS_SELECTOR, \"#password\")\n    BOTAO_ENTRAR = (By.CSS_SELECTOR, \"button[type='submit']\")\n\nclass LoginPage:\n    def preencher_usuario(self, texto):\n        return self._fill_element(self.locators.USUARIO, texto)"
+    }
+  },
+  "techStack": [
+    {
+      "name": "Cypress",
+      "icon": "TestTube2"
+    },
+    {
+      "name": "Selenium",
+      "icon": "Globe"
+    },
+    {
+      "name": "Playwright",
+      "icon": "Terminal"
+    },
+    {
+      "name": "Gherkin/BDD",
+      "icon": "Code2"
+    },
+    {
+      "name": "Python",
+      "icon": "Cpu"
+    },
+    {
+      "name": "TypeScript",
+      "icon": "Code2"
+    },
+    {
+      "name": "AI Prompts",
+      "icon": "BrainCircuit"
+    },
+    {
+      "name": "REST APIs",
+      "icon": "Zap"
+    }
+  ],
+  "experience": [
+    {
+      "year": "2023 - Presente",
+      "title": "QA Engineer",
+      "company": "NTT Data",
+      "description": "Liderança em automação de testes com Cypress e Selenium. Desenvolvimento de frameworks de teste e integração com pipelines CI/CD. Implementação de testes de API e performance.",
+      "isActive": true
+    },
+    {
+      "year": "2022 - 2023",
+      "title": "QA Analyst",
+      "company": "NTT Data",
+      "description": "Análise e execução de testes funcionais e de regressão. Documentação de casos de teste em Gherkin/BDD. Colaboração com times de desenvolvimento ágil.",
+      "isActive": false
+    },
+    {
+      "year": "2021 - 2022",
+      "title": "QA Trainee",
+      "company": "NTT Data",
+      "description": "Introdução às práticas de QA e metodologias de teste. Aprendizado de ferramentas de automação e boas práticas de desenvolvimento de software.",
+      "isActive": false
+    }
+  ],
+  "learning": {
+    "title": "Always Learning",
+    "subtitle": "Inglês em Aprimoramento",
+    "progress": 40,
+    "level": "Nível Básico-Intermediário"
+  },
+  "metrics": [
+    {
+      "value": "500+",
+      "label": "Casos de Teste Automatizados"
+    },
+    {
+      "value": "3+",
+      "label": "Anos de Experiência"
+    },
+    {
+      "value": "100%",
+      "label": "Comprometimento"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CTFL Foundation",
+      "issuer": "BSTQB",
+      "year": "2025",
+      "credentialUrl": ""
+    }
+  ]
+}
