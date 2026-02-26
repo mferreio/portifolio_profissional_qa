@@ -50,23 +50,72 @@ export default function ResumePage() {
             const html2canvas = (await import("html2canvas")).default;
             const jsPDF = (await import("jspdf")).default;
 
-            const canvas = await html2canvas(resumeRef.current, {
-                scale: 2,
+            const element = resumeRef.current;
+            const pxPageHeight = (element.offsetWidth * 297) / 210;
+            const elementsToAvoidBreak = element.querySelectorAll('.pdf-item');
+            const originalStyles: { el: HTMLElement; marginTop: string }[] = [];
+
+            elementsToAvoidBreak.forEach((node) => {
+                const el = node as HTMLElement;
+                originalStyles.push({ el, marginTop: el.style.marginTop });
+                
+                const parentTop = element.getBoundingClientRect().top;
+                const rect = el.getBoundingClientRect();
+                const top = rect.top - parentTop;
+                
+                const startPage = Math.floor(top / pxPageHeight);
+                const endPage = Math.floor((top + rect.height) / pxPageHeight);
+                
+                if (endPage > startPage && rect.height < pxPageHeight) {
+                    // Adiciona um buffer para a seção não tocar na borda exata da página
+                    const shift = ((startPage + 1) * pxPageHeight) - top + 24;
+                    const currentMarginTop = parseFloat(window.getComputedStyle(el).marginTop) || 0;
+                    el.style.marginTop = `${currentMarginTop + shift}px`;
+                }
+            });
+
+            // Aguarda a renderização do novo layout
+            await new Promise((resolve) => setTimeout(resolve, 50));
+
+            const canvas = await html2canvas(element, {
+                // Reduzido o scale de 2 para 1.5, o que corta drasticamente a densidade (tamanho) da imagem
+                // mantendo qualidade perfeitamente aceitável para currículos.
+                scale: 1.5,
                 useCORS: true,
                 backgroundColor: "#ffffff",
             });
 
-            const imgData = canvas.toDataURL("image/png");
+            // Restaura as margens
+            originalStyles.forEach(({ el, marginTop }) => {
+                el.style.marginTop = marginTop;
+            });
+
+            // Converte pra JPEG em vez de PNG. PNG = Sem perda (Giga enorme). JPEG = Lossy com compressão brutal.
+            // O 0.8 no final determina 80% de qualidade.
+            const imgData = canvas.toDataURL("image/jpeg", 0.8);
             const pdf = new jsPDF({
                 orientation: "portrait",
                 unit: "mm",
                 format: "a4",
+                compress: true, // Ativa a compressão nativa do jsPDF
             });
 
             const imgWidth = 210;
+            const pageHeight = 297; // A4 page height in mm
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
 
-            pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+            pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
             pdf.save(`${config.personal.firstName}_${config.personal.lastName}_CV.pdf`);
         } catch (error) {
             console.error("Error generating PDF:", error);
@@ -117,7 +166,7 @@ export default function ResumePage() {
                     style={{ fontFamily: "Arial, sans-serif" }}
                 >
                     {/* Header */}
-                    <div className="border-b-2 border-blue-600 pb-6 mb-6">
+                    <div className="border-b-2 border-blue-600 pb-6 mb-6 pdf-item">
                         <h1 className="text-4xl font-bold text-gray-900 mb-2">
                             {config.personal.firstName} {config.personal.lastName}
                         </h1>
@@ -153,7 +202,7 @@ export default function ResumePage() {
                     </div>
 
                     {/* Summary */}
-                    <div className="mb-6">
+                    <div className="mb-6 pdf-item">
                         <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
                             <span className="w-8 h-0.5 bg-blue-600"></span>
                             Resumo Profissional
@@ -165,12 +214,12 @@ export default function ResumePage() {
 
                     {/* Experience */}
                     <div className="mb-6">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2 pdf-item">
                             <Briefcase size={18} className="text-blue-600" />
                             Experiência Profissional
                         </h3>
                         {config.experience.map((exp, index) => (
-                            <div key={index} className="mb-4 last:mb-0">
+                            <div key={index} className="mb-4 last:mb-0 pdf-item">
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <h4 className="font-bold text-gray-900">{exp.title}</h4>
@@ -187,7 +236,7 @@ export default function ResumePage() {
 
                     {/* Qualifications */}
                     {config.qualifications && config.qualifications.length > 0 && (
-                        <div className="mb-6">
+                        <div className="mb-6 pdf-item">
                             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                                 <GraduationCap size={18} className="text-blue-600" />
                                 Formação Acadêmica
@@ -207,7 +256,7 @@ export default function ResumePage() {
 
                     {/* Certifications */}
                     {config.certifications && config.certifications.length > 0 && (
-                        <div className="mb-6">
+                        <div className="mb-6 pdf-item">
                             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                                 <Award size={18} className="text-blue-600" />
                                 Certificações
@@ -226,7 +275,7 @@ export default function ResumePage() {
                     )}
 
                     {/* Tech Stack */}
-                    <div className="mb-6">
+                    <div className="mb-6 pdf-item">
                         <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                             <Code2 size={18} className="text-blue-600" />
                             Habilidades Técnicas
@@ -245,7 +294,7 @@ export default function ResumePage() {
 
                     {/* Projects */}
                     {config.project && (
-                        <div className="mb-6">
+                        <div className="mb-6 pdf-item">
                             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                                 <Rocket size={18} className="text-blue-600" />
                                 Projeto em Destaque
@@ -270,7 +319,7 @@ export default function ResumePage() {
                     )}
 
                     {/* Languages / Learning */}
-                    <div>
+                    <div className="pdf-item">
                         <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                             <BookOpen size={18} className="text-blue-600" />
                             Idiomas e Aprendizados
