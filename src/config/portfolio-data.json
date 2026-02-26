@@ -2,10 +2,10 @@
   "personal": {
     "firstName": "Matheus",
     "lastName": "Ferreira",
-    "role": "QA Engineer",
+    "role": "QA Automation Specialist",
     "tagline": "<QA Engineer />",
     "description": "Atuo realizando testes funcionais manual e automatizando buscando utilizar AI para tornar os testes mais eficientes e precisos. Desenvolvi a BDD_PyTech, ferramentas focada em produtividade; sempre buscando formas de simplificar o dia a dia da equipe e diminuir barreira de entrada para novos profissionais. Além da parte técnica, gosto muito de trocar experiências e ajudar quem está começando a trilhar o caminho da qualidade de software e automação, acreditando que o conhecimento compartilhado fortalece todo o time.",
-    "statusBadge": "Available for Projects",
+    "statusBadge": "Disponivel",
     "email": "mferreio.qa@gmail.com",
     "phone": "5522988741592",
     "linkedin": "https://www.linkedin.com/in/matheus-ferreira-57380271/",
@@ -14,7 +14,7 @@
   "project": {
     "name": "BDD_PyTech",
     "subtitle": "Assistente Automatizador",
-    "description": "O Gerador de Testes Automatizados BDD é uma extensão para navegador que captura automaticamente as interações do usuário em páginas web e gera um projeto completo de testes automatizados em Python usando Selenium e Behave (BDD - Behavior Driven Development).",
+    "description": "Desenvolvi o Gerador de Testes Automatizados BDD para ser uma extensão para navegador que captura automaticamente as interações do usuário em páginas web e gera um projeto completo de testes automatizados em Python usando Selenium e Behave (BDD - Behavior Driven Development).",
     "features": [
       "Chrome Extension",
       "AI Integration",
@@ -44,22 +44,14 @@
       "icon": "Cpu"
     },
     {
-      "name": "TypeScript",
+      "name": "Scrum",
       "icon": "Code2"
-    },
-    {
-      "name": "AI Prompts",
-      "icon": "BrainCircuit"
-    },
-    {
-      "name": "REST APIs",
-      "icon": "Zap"
     }
   ],
   "experience": [
     {
       "year": "2022 - Presente",
-      "title": "Especialista de QA",
+      "title": "QA Automation Specialist",
       "company": "NTT Data",
       "description": "Atuação em projetos de grande porte nos setores de telefonia (TIM, Oi) e energia (Neoenergia), com foco em garantia da qualidade de software, automação de testes e metodologias ágeis. Responsável por:\n\nPlanejamento, escrita e execução de cenários de testes funcionais e não funcionais para aplicações Web e Mobile\nDesenvolvimento de testes automatizados com Selenium e Python, integrados ao pipeline de CI/CD\nParticipação em projetos críticos de telecomunicações e energia, garantindo a estabilidade e confiabilidade de sistemas de alto impacto\nUtilização de ferramentas como JIRA, Visual Studio Code, JUnit e Azure DevOps para gestão de testes e bugs\nApoio na especificação funcional, validação de critérios de aceitação (UAT) e testes de regressão\nColaboração com times multidisciplinares em ambientes Scrum/Kanban, com foco em entregas contínuas e melhoria de processos",
       "isActive": true
@@ -105,6 +97,42 @@
       "title": " Inteligência Artificial Fundamentos 2.0",
       "institution": "DATA SCIENCE ACADEMY",
       "year": "2021",
+      "type": "course"
+    },
+    {
+      "title": "Análise e desenvolvimento de Sistema",
+      "institution": "Universidade Cruzeiro do Sul",
+      "year": "2025",
+      "type": "graduation"
+    },
+    {
+      "title": "Liderança em qualidade de software",
+      "institution": "Udemy",
+      "year": "2022",
+      "type": "course"
+    },
+    {
+      "title": "Inteligência Artificial Fundamentos 2.0",
+      "institution": "Data Science Academy",
+      "year": "2021",
+      "type": "course"
+    },
+    {
+      "title": "Git e Git Hub",
+      "institution": "DIO",
+      "year": "2021",
+      "type": "course"
+    },
+    {
+      "title": "Planejamento e gestão de Projetos",
+      "institution": "Udemy",
+      "year": "2019",
+      "type": "course"
+    },
+    {
+      "title": "Fundamentos básicos de Scrum e Kambam",
+      "institution": "Udemy",
+      "year": "2022",
       "type": "course"
     }
   ]

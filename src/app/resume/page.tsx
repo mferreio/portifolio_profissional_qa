@@ -14,6 +14,8 @@ import {
     Briefcase,
     Code2,
     GraduationCap,
+    Rocket,
+    BookOpen,
 } from "lucide-react";
 import Link from "next/link";
 import type { PortfolioConfig } from "@/config/portfolio";
@@ -183,6 +185,26 @@ export default function ResumePage() {
                         ))}
                     </div>
 
+                    {/* Qualifications */}
+                    {config.qualifications && config.qualifications.length > 0 && (
+                        <div className="mb-6">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <GraduationCap size={18} className="text-blue-600" />
+                                Formação Acadêmica
+                            </h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                {config.qualifications.map((qual, index) => (
+                                    <div key={index} className="border-l-2 border-blue-600 pl-3">
+                                        <h4 className="font-bold text-gray-900 text-sm">{qual.title}</h4>
+                                        <p className="text-gray-600 text-xs">
+                                            {qual.institution} • {qual.year}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     {/* Certifications */}
                     {config.certifications && config.certifications.length > 0 && (
                         <div className="mb-6">
@@ -221,16 +243,53 @@ export default function ResumePage() {
                         </div>
                     </div>
 
+                    {/* Projects */}
+                    {config.project && (
+                        <div className="mb-6">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <Rocket size={18} className="text-blue-600" />
+                                Projeto em Destaque
+                            </h3>
+                            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                                <div className="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 className="font-bold text-gray-900">{config.project.name}</h4>
+                                        <p className="text-blue-600 text-sm font-medium">{config.project.subtitle}</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-600 text-sm mb-3">{config.project.description}</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {config.project.features.map((feature, idx) => (
+                                        <span key={idx} className="px-2 py-1 bg-white border border-gray-200 text-gray-600 rounded text-xs font-medium">
+                                            {feature}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Languages / Learning */}
                     <div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                            <GraduationCap size={18} className="text-blue-600" />
-                            Idiomas
+                        <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <BookOpen size={18} className="text-blue-600" />
+                            Idiomas e Aprendizados
                         </h3>
-                        <p className="text-gray-700">
-                            <span className="font-medium">Português:</span> Nativo •{" "}
-                            <span className="font-medium">Inglês:</span> {config.learning.level}
-                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="border-l-2 border-blue-600 pl-3">
+                                <h4 className="font-bold text-gray-900 text-sm">Idiomas</h4>
+                                <p className="text-gray-600 text-xs mt-1">
+                                    <span className="font-medium">Português:</span> Nativo<br/>
+                                    <span className="font-medium">Inglês:</span> {config.learning.level}
+                                </p>
+                            </div>
+                            <div className="border-l-2 border-blue-600 pl-3">
+                                <h4 className="font-bold text-gray-900 text-sm">{config.learning.title}</h4>
+                                <p className="text-gray-600 text-xs mt-1">
+                                    {config.learning.subtitle}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
